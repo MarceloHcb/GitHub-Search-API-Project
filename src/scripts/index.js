@@ -1,8 +1,56 @@
+const screen = {
+    userProfile: document.querySelector('.profile-data'),
+    renderUser(user) {
+        this.userProfile.innerHTML = `<div class="info"><img src="${user.avatarUrl}" alt="Foto do Perfil do usuário />
+                            <div class="data">
+                                 <h1>${user.name ?? 'Não possui nome cadastrado 😥'}</h1>
+                                 <p>${user.bio ?? 'Não possui bio cadastrada 😥'}</p>
+                                 </div>
+                                 </div>`
+        let repositoriesItens = ""
+        user.repositories.forEach(repo => repositoriesItens += `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a></li>`)
+        if (user.repositories.length > 0) {
+            this.userProfile.innerHTML += `<div class="repositories section">
+                                            <h2>Repositórios</h2>
+                                            <ul>${repositoriesItens}</ul>
+                                            </div>`
+        }
+    },
+    renderNotFound(){
+        this.userProfile.innerHTML =" <h3>Usuário não encontrado</h3>"
+    }
+}
+const user = {
+    avatarUrl: "",
+    name:"",
+    bio:"",
+    userName:"",
+    repositories: [],
+    setInfo(gitHubUser){
+        this.avatarUrl = gitHubUser.avatar_url
+        this.name = gitHubUser.name
+        this.bio = gitHubUser.bio
+        this.userName = gitHubUser.login        
+    },
+    setRepositories(repositories){
+        this.repositories = repositories
+    }
+}
+async function getRepositories(userName){
+    const response = await fetch(`${baseUrl}/${userName}/repos?per_page=${repositoriesQuantity}`)
+    return await response.json()    
+}
 
-import { getUser } from '../../src/scripts/services/user.js'
-import { getRepositories } from '../../src/scripts/services/repositories.js'
-import { user } from '../../src/scripts/objects/user.js'
-import { screen } from '../../src/scripts/objects/screen.js'
+async function getUser(userName){
+    const response = await fetch(`${baseUrl}/${userName}`)
+    return await response.json()    
+}
+
+const baseUrl = "https://api.github.com/users"
+const repositoriesQuantity = 10
+
+export { baseUrl, repositoriesQuantity}
+
 
 document.getElementById("btn-search").addEventListener("click", () => {
     const userName = document.getElementById("input-search").value
