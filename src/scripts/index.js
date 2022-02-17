@@ -17,14 +17,19 @@ const screen = {
                                  </div>`
                                  
         let repositoriesItens = ""
-        user.repositories.forEach(repo => repositoriesItens += `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a></li>`)
+        user.repositories.forEach(repo => repositoriesItens += `<li><a href="${repo.html_url}" target="_blank">${repo.name}<div class="atributes"><p>🍴${repo.forks}</p><p>⭐${repo.stargazers_count}</p><p>👀${repo.watchers}</p><p> 👨‍💻${repo.language}</p></div> </a>
+        </li> 
+        
+        `)
         if (user.repositories.length > 0) {
             this.userProfile.innerHTML += `<div class="repositories section">
                                             <h2>Repositórios</h2>
                                             <ul>${repositoriesItens}</ul>
                                             </div>
+                                            
                                             `
         }
+
     },
     renderNotFound(){
         this.userProfile.innerHTML =" <h3>Usuário não encontrado</h3>"
@@ -36,7 +41,8 @@ const user = {
     bio:"",
     userName:"",
     followers:"",
-    following:"",     
+    following:"",
+    forks:"",     
     repositories: [],
     setInfo(gitHubUser){
         this.avatarUrl = gitHubUser.avatar_url

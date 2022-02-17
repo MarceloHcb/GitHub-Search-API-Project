@@ -173,6 +173,18 @@ main {
 .following p{
   background-color: rgb(118, 36, 196);
 }
+.atributes{
+  display: flex;
+}
+.atributes p{
+  gap: 5px;
+  margin: 5px;
+  padding: 5px;
+  color: white;
+  background-color: rgb(126, 97, 223);
+  border-radius: 5px;
+}
+
 
 @media (max-width: 1280px) {
   .container {
