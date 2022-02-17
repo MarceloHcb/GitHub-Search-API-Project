@@ -5,15 +5,25 @@ const screen = {
                             <div class="data">
                                  <h1>${user.name ?? 'Não possui nome cadastrado 😥'}</h1>
                                  <p>${user.bio ?? 'Não possui bio cadastrada 😥'}</p>
+                                 <div class="followers-content">
+                                 <div class="followers">
+                                     <h5>👥Seguidores</h5>
+                                     <p>${user.followers}</p>
+                                 </div>
+                                 <div class="following">
+                                     <h5>👥Seguindo</h5>
+                                     <p>${user.following}</p>
                                  </div>
                                  </div>`
+                                 
         let repositoriesItens = ""
         user.repositories.forEach(repo => repositoriesItens += `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a></li>`)
         if (user.repositories.length > 0) {
             this.userProfile.innerHTML += `<div class="repositories section">
                                             <h2>Repositórios</h2>
                                             <ul>${repositoriesItens}</ul>
-                                            </div>`
+                                            </div>
+                                            `
         }
     },
     renderNotFound(){
@@ -25,17 +35,28 @@ const user = {
     name:"",
     bio:"",
     userName:"",
+    followers:"",
+    following:"",     
     repositories: [],
     setInfo(gitHubUser){
         this.avatarUrl = gitHubUser.avatar_url
         this.name = gitHubUser.name
         this.bio = gitHubUser.bio
-        this.userName = gitHubUser.login        
+        this.userName = gitHubUser.login 
+        this.followers = gitHubUser.followers   
+        this.following = gitHubUser.following
+        console.log(gitHubUser) 
+       
     },
+    
     setRepositories(repositories){
         this.repositories = repositories
-    }
+        console.log(repositories)      
+        
+          
+    },
 }
+
 async function getRepositories(userName){
     const response = await fetch(`${baseUrl}/${userName}/repos?per_page=${repositoriesQuantity}`)
     return await response.json()    

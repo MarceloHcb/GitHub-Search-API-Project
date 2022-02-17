@@ -151,6 +151,28 @@ main {
 .container .profile-data.hide{
   display: none;
 }
+.followers-content{
+  display: flex;  
+  align-items: center;
+  justify-content: space-between;
+ 
+  padding: 20px;
+
+}
+.followers-content p{
+  background-color:hotpink;
+  border-radius: 50%;
+  width: 70px;
+  height: 30px;  
+  display: flex;  
+  align-items: center;
+  justify-content: center;
+  color: white;  
+  margin: 20px 15vh;
+}
+.following p{
+  background-color: rgb(118, 36, 196);
+}
 
 @media (max-width: 1280px) {
   .container {
