@@ -9,6 +9,11 @@
 img {
   max-width: 100%;
 }
+hr{
+  width: 100%;
+  margin-bottom: 50px;
+  opacity: 0.5;
+}
 
 body {
   background-color:#24292e;
@@ -101,6 +106,7 @@ main {
 .container .profile-data .info .data{
   padding: 40px;
   width: 50%;
+ 
 }
 
 .container .profile-data .info img{

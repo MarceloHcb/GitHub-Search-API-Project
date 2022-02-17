@@ -1,7 +1,7 @@
 const screen = {
     userProfile: document.querySelector('.profile-data'),
     renderUser(user) {
-        this.userProfile.innerHTML = `<div class="info"><img src="${user.avatarUrl}" alt="Foto do Perfil do usuário />
+        this.userProfile.innerHTML = `<hr><div class="info"><img src="${user.avatarUrl}" alt="Foto do Perfil do usuário />
                             <div class="data">
                                  <h1>${user.name ?? 'Não possui nome cadastrado 😥'}</h1>
                                  <p>${user.bio ?? 'Não possui bio cadastrada 😥'}</p>
