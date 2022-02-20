@@ -37,15 +37,12 @@ const screen = {
                                             
                                             `
         }
-        // let activitiesItens = user.activities.map(activitie => {
-        //   " oi "   
-        // })
-        // console.log(activitiesItens)
+       
         let data = ""      
 
          user.activities.forEach((activity, index , array) =>{
               
-            data+=` <li> ${activity.repo.name} - </li> `               
+            data+=` <li> ${activity.repo.name}: </li> `               
             
          })
          console.log(data)

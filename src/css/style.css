@@ -261,6 +261,9 @@ flex-wrap: wrap;
 hr{
 width: 45%;
 }
+.activities{
+  width: 80%;
+}
 }
 @media (max-width: 425px) {
   main {
@@ -269,8 +272,8 @@ width: 45%;
   hr {
 width: 30%;
   }
-  .activities p{
-  width: 10%;
+  .activities{
+    width: 70%;
   }
   .container .profile-data .info img{
     margin-bottom: 20px;
