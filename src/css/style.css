@@ -164,21 +164,19 @@ main {
 .followers-content{
   display: flex;  
   align-items: center;
-  justify-content: space-between;
- 
-  padding: 20px;
-
+  justify-content: space-between; 
+  padding: 20px;  
 }
 .followers-content p{
   background-color:hotpink;
   border-radius: 50%;
-  width: 70px;
-  height: 30px;  
+  width: 105px;
+  height: 50px;  
   display: flex;  
   align-items: center;
   justify-content: center;
   color: white;  
-  margin: 20px 15vh;
+  margin: 20px 15vh;  
 }
 .following p{
   background-color: rgb(118, 36, 196);
@@ -193,6 +191,19 @@ main {
   color: white;
   background-color: rgb(126, 97, 223);
   border-radius: 5px;
+}
+.activities{
+  text-align: left;
+  font-weight: 700;
+  width: 100%;
+}
+.activities h2{
+  text-align: center;
+  font-size: 35px;  
+}
+.activities li{
+  font-weight: 700;
+  margin-bottom: 15px;
 }
 
 

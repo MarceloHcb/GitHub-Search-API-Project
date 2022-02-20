@@ -51,7 +51,7 @@ const screen = {
          console.log(data)
               
         if (user.activities.length > 0 ) {
-            this.userProfile.innerHTML += `<div >
+            this.userProfile.innerHTML += `<div class="activities">
                                             <h2>Atividades</h2>
                                             <ul>
                                             ${data}                                             
