@@ -1,10 +1,13 @@
-const screen = {
+const screen = {  
+
     userProfile: document.querySelector('.profile-data'),
     renderUser(user) {
         this.userProfile.innerHTML = `<hr><div class="info"><img src="${user.avatarUrl}" alt="Foto do Perfil do usuário />
                             <div class="data">
                                  <h1>${user.name ?? 'Não possui nome cadastrado 😥'}</h1>
                                  <p>${user.bio ?? 'Não possui bio cadastrada 😥'}</p>
+                                 </div>  
+                                 </div> 
                                  <div class="followers-content">
                                  <div class="followers">
                                      <h5>👥Seguidores</h5>
@@ -13,18 +16,46 @@ const screen = {
                                  <div class="following">
                                      <h5>👥Seguindo</h5>
                                      <p>${user.following}</p>
-                                 </div>
+                                
+                                 </div>                                 
                                  </div>`
-                                 
+               
+     
         let repositoriesItens = ""
         user.repositories.forEach(repo => repositoriesItens += `<li><a href="${repo.html_url}" target="_blank">${repo.name}<div class="atributes"><p>🍴${repo.forks}</p><p>⭐${repo.stargazers_count}</p><p>👀${repo.watchers}</p><p> 👨‍💻${repo.language}</p></div> </a>
-        </li> 
+        </li>
         
         `)
-        if (user.repositories.length > 0) {
+        if (user.repositories.length > 0 ) {
+            
             this.userProfile.innerHTML += `<div class="repositories section">
+                                            <hr>
                                             <h2>Repositórios</h2>
                                             <ul>${repositoriesItens}</ul>
+                                            </div>
+                                            <hr>
+                                            
+                                            `
+        }
+        // let activitiesItens = user.activities.map(activitie => {
+        //   " oi "   
+        // })
+        // console.log(activitiesItens)
+        let data = ""      
+
+         user.activities.forEach((activity, index , array) =>{
+              
+            data+=` <li> ${activity.repo.name} - </li> `               
+            
+         })
+         console.log(data)
+              
+        if (user.activities.length > 0 ) {
+            this.userProfile.innerHTML += `<div >
+                                            <h2>Atividades</h2>
+                                            <ul>
+                                            ${data}                                             
+                                            </ul>                                     
                                             </div>
                                             
                                             `
@@ -43,40 +74,45 @@ const user = {
     followers:"",
     following:"",
     forks:"",     
-    repositories: [],
+    repositories: [],   
+    activities:[],    
+
     setInfo(gitHubUser){
         this.avatarUrl = gitHubUser.avatar_url
         this.name = gitHubUser.name
         this.bio = gitHubUser.bio
         this.userName = gitHubUser.login 
         this.followers = gitHubUser.followers   
-        this.following = gitHubUser.following
-        console.log(gitHubUser) 
-       
+        this.following = gitHubUser.following                        
     },
-    
+    setActivities(activities){
+        this.activities =  activities         
+        console.log(activities)
+    },
     setRepositories(repositories){
-        this.repositories = repositories
-        console.log(repositories)      
-        
-          
-    },
-}
+        this.repositories = repositories  
+             
+    },}
 
 async function getRepositories(userName){
     const response = await fetch(`${baseUrl}/${userName}/repos?per_page=${repositoriesQuantity}`)
-    return await response.json()    
-}
+    return await response.json() 
+     }
 
 async function getUser(userName){
     const response = await fetch(`${baseUrl}/${userName}`)
+    return await response.json() 
+   
+}
+
+async function getActivities(userName){
+    const response = await fetch(`${baseUrl}/${userName}/events/public`)
     return await response.json()    
 }
 
+
 const baseUrl = "https://api.github.com/users"
 const repositoriesQuantity = 10
-
-export { baseUrl, repositoriesQuantity}
 
 
 document.getElementById("btn-search").addEventListener("click", () => {
@@ -103,13 +139,15 @@ document.getElementById("input-search").addEventListener("keyup", (e) => {
 
 async function getUserData(userName) {
     const userResponse = await getUser(userName)
-
     if(userResponse.message === "Not Found"){
         screen.renderNotFound()
         return
     }
     const repositoriesResponse = await getRepositories(userName)
+    const activitiesResponse = await getActivities(userName)
     user.setInfo(userResponse)
     user.setRepositories(repositoriesResponse)
+    user.setActivities(activitiesResponse)
     screen.renderUser(user)
+
 }
