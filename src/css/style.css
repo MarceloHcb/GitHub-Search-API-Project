@@ -108,8 +108,7 @@ main {
 
 .container .profile-data .info .data{
   padding: 40px;
-  width: 50%; 
- 
+  width: 50%;  
 }
 
 .container .profile-data .info img{
@@ -206,13 +205,15 @@ main {
   margin-bottom: 15px;
 }
 
-
-@media (max-width: 1280px) {
+@media (max-width: 1500px) {
   .container {
     flex-direction: column;
     width: 90%;
     border-radius: 20px;
   }
+  hr{
+    width: 80%;
+    }
 
   .container header {
     width: 100%;
@@ -223,25 +224,58 @@ main {
     text-align: center;
   }
 }
-
+@media (max-width: 1000px) {
+.container .profile-data .info{
+   display: block;   
+  }
+.container .profile-data .info img{
+width: 50%;
+margin-bottom: 20px;
+  }
+.activities{
+  text-align: center;
+}
+}
 @media (max-width: 768px) {
   .container header #input-search,
   .container header #btn-search
   {
     width: 100%;
   }
+  hr{
+    width: 60%;
+  }
 }
-
+@media (max-width: 700px) {
+.followers-content{
+width: 70%;
+flex-wrap: wrap;
+}
+.container .profile-data .repositories{
+  width: 70%;
+  justify-self: center;
+  align-self: center;  
+}
+}
+@media (max-width: 620px) {
+hr{
+width: 45%;
+}
+}
 @media (max-width: 425px) {
   main {
     padding: 15% 0;    
   }
-
+  hr {
+width: 30%;
+  }
+  .activities p{
+  width: 10%;
+  }
   .container .profile-data .info img{
     margin-bottom: 20px;
   }
-
-  .container .profile-data .info img,
+ 
   .container .profile-data .info .data
   {
     width: 100%;

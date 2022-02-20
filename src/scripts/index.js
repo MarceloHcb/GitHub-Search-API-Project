@@ -6,8 +6,7 @@ const screen = {
                             <div class="data">
                                  <h1>${user.name ?? 'Não possui nome cadastrado 😥'}</h1>
                                  <p>${user.bio ?? 'Não possui bio cadastrada 😥'}</p>
-                                 </div>  
-                                 </div> 
+                                
                                  <div class="followers-content">
                                  <div class="followers">
                                      <h5>👥Seguidores</h5>
@@ -16,7 +15,8 @@ const screen = {
                                  <div class="following">
                                      <h5>👥Seguindo</h5>
                                      <p>${user.following}</p>
-                                
+                                     </div>  
+                                     </div> 
                                  </div>                                 
                                  </div>`
                
@@ -28,8 +28,8 @@ const screen = {
         `)
         if (user.repositories.length > 0 ) {
             
-            this.userProfile.innerHTML += `<div class="repositories section">
-                                            <hr>
+            this.userProfile.innerHTML += `<hr><div class="repositories section">
+                                            
                                             <h2>Repositórios</h2>
                                             <ul>${repositoriesItens}</ul>
                                             </div>
