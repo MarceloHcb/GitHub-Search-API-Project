@@ -38,23 +38,28 @@ const screen = {
                                             `
         }
        
-        let data = ""      
-
+        let data = "" 
+        let commit = "" 
+        
          user.activities.forEach((activity, index , array) =>{
-              
-            data+=` <li> ${activity.repo.name}: </li> `               
             
-         })
-         console.log(data)
+            commit = (activity.type)                   
+            data+=` <li> ${activity.repo.name}:   ${commit} </li> `           
+         })         
+        
+        //  user.activities.payload.forEach((commit, index, array) =>{
+        //     commits+= ` <li> ${commit.commits.message}: </li> `  
+        //  })
+        //  console.log(data)
+        //  console.log(commits)
               
         if (user.activities.length > 0 ) {
             this.userProfile.innerHTML += `<div class="activities">
                                             <h2>Atividades</h2>
                                             <ul>
-                                            ${data}                                             
+                                            ${data}                                      
                                             </ul>                                     
-                                            </div>
-                                            
+                                            </div>                                            
                                             `
         }
 
@@ -69,11 +74,9 @@ const user = {
     bio:"",
     userName:"",
     followers:"",
-    following:"",
-    forks:"",     
+    following:"",      
     repositories: [],   
-    activities:[],    
-
+    activities:[],   
     setInfo(gitHubUser){
         this.avatarUrl = gitHubUser.avatar_url
         this.name = gitHubUser.name
@@ -98,8 +101,7 @@ async function getRepositories(userName){
 
 async function getUser(userName){
     const response = await fetch(`${baseUrl}/${userName}`)
-    return await response.json() 
-   
+    return await response.json()    
 }
 
 async function getActivities(userName){
