@@ -54,7 +54,7 @@ const screen = {
         //  console.log(data)
         //  console.log(commits)
 
-        if (user.activities.length > 0) {
+        if (user.activities.length > 0 ) {
             this.userProfile.innerHTML += `<div class="activities">
                                             <h2>Atividades</h2>
                                             <ul>
@@ -107,7 +107,7 @@ async function getUser(userName) {
 }
 
 async function getActivities(userName) {
-    const response = await fetch(`${baseUrl}/${userName}/events/public`)
+    const response = await fetch(`${baseUrl}/${userName}/events/public?per_page=${repositoriesQuantity}`)
     return await response.json()
 }
 
