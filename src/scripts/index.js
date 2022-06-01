@@ -39,31 +39,30 @@ const screen = {
                                             `
         }
 
-        let data = ""
-        let commit = ""
+        if (user.activities.length > 0) {
+            let eventsItems = '';
+            user.activities.forEach((event) => {
+                const getActivities = event.payload.push_id;
+                if (getActivities === undefined) {
+                    return;
+                }
 
-        user.activities.forEach((activity, index, array) => {
+                eventsItems += `<ul>
+                                    <li>${event.repo.name}:
+                                        <span>: ${event.payload.commits[0].message}</span>
+                                    </li>
+                                </ul>`
+            });
 
-            commit = (activity.type)
-            data += ` <li> ${activity.repo.name}:   ${commit} </li> `
-        })
-
-        //  user.activities.payload.forEach((commit, index, array) =>{
-        //     commits+= ` <li> ${commit.commits.message}: </li> `  
-        //  })
-        //  console.log(data)
-        //  console.log(commits)
-
-        if (user.activities.length > 0 ) {
-            this.userProfile.innerHTML += `<div class="activities">
-                                            <h2>Atividades</h2>
-                                            <ul>
-                                            ${data}                                      
-                                            </ul>                                     
-                                            </div>                                            
-                                            `
+            if (user.activities.length > 0) {
+                this.userProfile.innerHTML += `
+                        <div class="activities">
+                        <h2>Atividades</h2>
+                        <ul>${eventsItems}</ul>
+                        </div>
+                    `;
+            }
         }
-
     },
     renderNotFound() {
         this.userProfile.innerHTML = " <h3>Usuário não encontrado</h3>"
